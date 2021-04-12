@@ -12,11 +12,10 @@
     <section>
         <h1>Under development...</h1>
     </section>
-     
-    <audio id="myAudio" src="audio/BgMusic.mp3"></audio>
-    <script type="text/javascript">
-      document.getElementById("myAudio").volume = 0.1;
-      document.getElementById("myAudio").play();
-    </script>
+    <audio autoplay loop id="bgAudio"><source src="audio/BgMusic.mp3" type="audio/mp3"></audio>
+        <script>
+            var audio = document.getElementById("bgAudio");
+            audio.volume = 0.1;
+        </script>  
 </body>
 </html>
