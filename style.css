@@ -17,6 +17,8 @@ section{
     color: #fff;
     background: linear-gradient(45deg, #237acc, #23D5AB);
     background-size: 200% 200%;
+    display: flex;
+    flex-direction: column;
     position: relative;
     animation: change 6s ease-in-out infinite;
 }
