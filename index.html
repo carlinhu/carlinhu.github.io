@@ -1,21 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel = "shortcut icon" type="image/png" href="img/favicon.png">
-    <title>Carlinhu</title>
+    <meta name="theme-color" content="#3d464d"/>
+    <meta name="description" content="Ca">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{ Carlos Menezes }</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <section>
-        <h1>Under development...</h1>
-    </section>
-    <audio autoplay loop id="bgAudio"><source src="audio/BgMusic.mp3" type="audio/mp3"></audio>
+<div>
+<div class="content">
+    <div class="av">
+        <div class="profile"></div>
+    </div>
+
+    <div class="headline">
+        <h1 class="headline"><b> Carlos Menezes </b></h1>
+        <h3 class="subtitle" style="margin-top: 15px;">Gameplay programmer in the video game industry.</h3>
+    </div>
+
+    <nav class="main-nav">
+        <ul>
+            <li class="abt">
+                <a href="#about" rel="noopener">About</a>
+            </li>
+            <li class="exp">
+                <a href="#experience" rel="noopener">Experience</a>
+            </li>
+            <li class="git">
+                <a href="https://github.com/carlinhu" rel="noopener" target="_blank">GitHub</a>
+            </li>
+            <li class="res">
+                <a href="files/Resume_Carlos_Menezes_Concencio.pdf" rel="noopener" target="_blank">Resume</a>
+            </li>
+            <li class="con">
+                <a href="mailto:carlosconcencio@gmail.com?Subject=Contact%20form" rel="noopener"
+                   target="_blank">Contact</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="info" class="info">
+        <div id="about" class="about">
+            <p style="display:inline" style="margin-top: -25px;">I'm a <span id="age"></span> years old software engineer with focus on game development.</p>
+        </div>
         <script>
-            var audio = document.getElementById("bgAudio");
-            audio.volume = 0.1;
-        </script>  
+            window.onload = function()
+            {
+            var birthDate = new Date("1995-06-15");
+            var currentData = new Date();
+            var calculatedAge = Math.floor((currentData - birthDate) / (1000 * 60 * 60 * 24 * 365.25));
+
+            document.getElementById("age").innerHTML = calculatedAge;
+            }
+        </script>
+    
+        <div id="experience" class="experience">
+            <p style="display:inline">I have contributed to AA games, taking on responsibilities for core combat and generic gameplay features. I have led sprints,<br>
+                  provided mentorship, emphasized code quality, and promoted good practices within the technical team, utilizing C# and Unity Engine 3D..
+            </p>
+        </div>
+    </div>
+
+
+    <div class="sm-container icon-links">
+        <div class="sm-icon">
+            <a href="https://www.linkedin.com/in/carlosmconcencio/" rel="noopener" target="_blank">
+                    <span>
+                        <img alt="LinkedIn icon" src="img/linkedin.png" height="24px" width="24px"/>
+                    </span>
+            </a>
+        </div>
+        <div class="sm-icon">
+            <a href="https://github.com/carlinhu" rel="noopener" target="_blank">
+                    <span>
+                        <img alt="GitHub icon" src="img/github.png" height="24px" width="24px"/>
+                    </span>
+            </a>
+        </div>
+        <div class="sm-icon">
+            <a href="https://assetstore.unity.com/publishers/37008" rel="noopener" target="_blank">
+                    <span>
+                        <img alt="Unity icon" src="img/unity.png" height="24px" width="24px"/>
+                    </span>
+            </a>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
