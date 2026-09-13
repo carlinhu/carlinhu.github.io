@@ -3,379 +3,235 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="theme-color" content="#3d464d"/>
-    <meta name="description" content="Ca">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10151a">
 
     <title>{ Carlos Menezes }</title>
-    <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="description"
+        content="Carlos Menezes, gameplay engineer building combat, gunplay and core systems for AAA games in Unreal Engine and Unity.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://carlinhu.github.io/">
+    <meta property="og:title" content="Carlos Menezes | Gameplay Engineer">
+    <meta property="og:description"
+        content="Combat, gunplay and core gameplay systems for AAA games. Unreal Engine, C++, Unity, C#.">
+    <meta name="twitter:card" content="summary">
+
+    <link rel="canonical" href="https://carlinhu.github.io/">
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+
+    <!-- Runs before first paint: enables reveal styles and applies the saved theme -->
+    <script>
+        document.documentElement.classList.add("js");
+
+        try
+        {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme === "light" || savedTheme === "dark")
+            {
+                document.documentElement.dataset.theme = savedTheme;
+            }
+        }
+        catch (error)
+        {
+            // storage can be blocked (private mode)
+        }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Raleway:wght@200;500&display=swap"
+        rel="stylesheet">
 
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700');
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/panels.css">
+    <link rel="stylesheet" href="css/timeline.css">
+    <link rel="stylesheet" href="css/social.css">
+    <link rel="stylesheet" href="css/paint.css">
 
-html {
-    font-size: 18px;
-    line-height: 1.4;
-}
-
-body {
-    font-family: 'Raleway', sans-serif;
-
-    background: linear-gradient(45deg, #f0f0f0, #e1fffa);
-    background-size: 200% 200%;
-    display: flex;
-    flex-direction: column;
-    animation: change 6s ease-in-out infinite;
-    
-     /* Disable text selection: https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting */
-    -webkit-touch-callout: none; /* iOS Safari */
-	-webkit-user-select: none; /* Safari */
-	-moz-user-select: none; /* Old versions of Firefox */
-	-ms-user-select: none; /* Internet Explorer/Edge */
-	user-select: none; /* Chrome, Opera and Firefox */
-}
-
-@keyframes change{
-    0%{
-        background-position: 0% 50%;
-    }
-    50%{
-        background-position: 100% 50%;
-    }
-    100%{
-        background-position: 0% 50%;
-    }
-}
-
-h1, h3 {
-    line-height: 1em;
-    text-rendering: optimizelegibility;
-}
-
-@media (max-width: 500px) {
-    html {
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 355px) {
-    html {
-        font-size: 12px;
-    }
-}
-
-@media (max-width: 310px) {
-    html {
-        font-size: 10px;
-    }
-}
-
-.content {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    overflow: scroll;
-    animation: content 2.5s forwards;
-
-    box-shadow: inset 0 0 100px 10px rgba(0, 0, 0, .12);
-    -webkit-box-shadow: inset 0 0 100px 10px rgba(0, 0, 0, .12);
-    -moz-box-shadow: inset 0 0 100px 10px rgba(0, 0, 0, .12);
-    -o-box-shadow: inset 0 0 100px 10px rgba(0, 0, 0, .12);
-}
-
-@keyframes content {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-}
-
-.av {
-    margin: 2em auto;
-    width: 14em;
-    height: 14em;
-    text-align: center;
-}
-
-.av .profile {
-    background: url('../img/minha_foto') no-repeat;
-    background-size: 100%;
-    height: 14em;
-    width: 14em;
-    display: inline-block;
-}
-
-.headline {
-    text-align: center;
-}
-
-.headline h1 {
-    font-size: 4em;
-    color: #3d464d;
-    margin: 0;
-    font-weight: 500;
-}
-
-.headline h3 {
-    margin: 0;
-    font-size: 2em;
-    font-weight: 100;
-    opacity: .6;
-}
-
-.subtitle {
-    color: #00295e9c;
-}
-
-.main-nav {
-    margin: 2em auto 0 auto;
-    text-align: center;
-    font-weight: 300;
-}
-
-.main-nav > ul {
-    padding: 0;
-}
-
-.main-nav > ul > li {
-    display: inline-block;
-    vertical-align: middle;
-
-    -webkit-transition: all .1s ease;
-    -moz-transition: all .1s ease;
-    -o-transition: all .1s ease;
-    transition: all .1s ease;
-}
-
-.main-nav > ul > li:first-child {
-    margin-left: 0;
-}
-
-.main-nav > ul > li:hover {
-    font-weight: 500;
-    scale: 1.05;
-}
-
-.main-nav > ul > li > a {
-    padding: 0;
-    margin-top: -32px;
-    text-decoration: none;
-    color: #3d464d;
-}
-
-.main-nav li.abt {
-    width: 3em;
-}
-
-.main-nav li.exp {
-    width: 5.7em;
-}
-
-.main-nav li.git {
-    width: 4em;
-}
-
-.main-nav li.res {
-    width: 3.8em;
-}
-
-.main-nav li.con {
-    width: 4em;
-}
-
-.info{
-    margin-top: 5px;
-    margin-bottom: 30px;
-}
-
-.about {
-    position: relative;
-    text-align: center;
-    font-size: 0.9em;
-    font-weight: 100;
-    opacity: 0;
-    visibility: hidden;
-    padding: 0 3em;
-    -webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    transition: all 1s ease;
-}
-
-.experience {
-    position: relative;
-    text-align: center;
-    margin-top: -20px;
-    font-size: 0.9em;
-    font-weight: 100;
-    opacity: 0;
-    visibility: hidden;
-    padding: 0 3em;
-    -webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    transition: all 1s ease;
-}
-
-#about,
-#experience {
-    opacity: 0;
-    visibility: hidden;
-    padding: 0 3em;
-
-    -webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    transition: all 1s ease;
-}
-
-#about:target,
-#experience:target {
-    opacity: .9;
-    visibility: visible;
-}
-
-.sm-container {
-    text-align: center;
-    margin: 0 auto;
-}
-
-.sm-container.icon-links {
-    height: 2em;
-    font-size: 18px;
-}
-
-.sm-icon {
-    background-color: #3d464d;
-    height: 2em;
-    width: 2em;
-    border-radius: 2em;
-    display: inline-block;
-
-    -webkit-transition: opacity .2s ease;
-    -moz-transition: opacity .2s ease;
-    -o-transition: opacity .2s ease;
-    transition: opacity .2s ease;
-}
-
-.sm-icon:hover {
-    opacity: .7;
-}
-
-.sm-icon img {
-    display: block;
-    margin: .3em auto;
-}
-
-p.github-link {
-    margin: 1em;
-    font-size: .7em;
-    text-decoration: none;
-    color: #3d464d;
-}
-
-p.github-link a {
-    text-decoration: none;
-    color: #3d464d;
-}
-
-p.github-link a:hover {
-    opacity: .5;
-}
-    </style>
+    <script src="js/age.js" defer></script>
+    <script src="js/particles.js" defer></script>
+    <script src="js/reveal.js" defer></script>
+    <script src="js/nav.js" defer></script>
+    <script src="js/timeline.js" defer></script>
+    <script src="js/interactions.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script src="js/paint.js" defer></script>
 </head>
 
 <body>
-<div>
-<div class="content">
-    <div class="av">
-        <div class="profile"></div>
-    </div>
+    <canvas id="bg-particles" aria-hidden="true"></canvas>
 
-    <div class="headline">
-        <h1 class="headline"><b> Carlos Menezes </b></h1>
-        <h3 class="subtitle" style="margin-top: 15px;">Gameplay programmer in the video game industry.</h3>
-    </div>
+    <div class="content">
 
-    <nav class="main-nav">
-        <ul>
-            <li class="abt">
-                <a href="#about" rel="noopener">About</a>
-            </li>
-            <li class="exp">
-                <a href="#experience" rel="noopener">Experience</a>
-            </li>
-            <li class="git">
-                <a href="https://github.com/carlinhu" rel="noopener" target="_blank">GitHub</a>
-            </li>
-            <li class="res">
-                <a href="files/Resume_Carlos_Menezes_Concencio.pdf" rel="noopener" target="_blank">Resume</a>
-            </li>
-        </ul>
-    </nav>
-
-    <div id="info" class="info">
-        <div id="about" class="about">
-            <p style="display:inline" style="margin-top: -25px;">I'm a <span id="age"></span> years old software engineer in the video game industry.</p>
-        </div>
-        <script>
-            window.onload = function()
-            {
-            var birthDate = new Date("1995-06-15");
-            var currentData = new Date();
-            var calculatedAge = Math.floor((currentData - birthDate) / (1000 * 60 * 60 * 24 * 365.25));
-
-            document.getElementById("age").innerHTML = calculatedAge;
-            }
-        </script>
-    
-        <div id="experience" class="experience">
-            <p style="display:inline">With experience in both AA and AAA games, I've specialized in developing core combat and gameplay features. I develop single<br>
-                and multiplayer cross-platform games using Unreal Engine and Unity Engine, with expertise in C++, C#, Gunplay, GAS, and other gameplay elements,<br>
-                 ensuring quality deliverables, leading system and gameplay development, and promoting mentorship, best practices, and code quality.
+        <header class="hero">
+            <h1>Carlos Menezes</h1>
+            <p class="subtitle paint-reveal">
+                <span class="paint-front">Gameplay Engineer in the video game industry.</span>
+                <span class="paint-back" aria-hidden="true">I love my cats</span>
             </p>
-        </div>
+        </header>
+
+        <nav class="main-nav" aria-label="Main">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li>
+                    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch theme">
+                        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5z" />
+                        </svg>
+                        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="12" r="4.2" />
+                            <path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5" />
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+        <section id="about" class="section">
+            <h2 class="section-title" data-reveal><span class="title-mask"><span>About</span></span></h2>
+
+            <div class="about-body" data-reveal>
+                <p>
+                    I'm a <span id="age">31</span>-year-old gameplay engineer in the video game industry.
+                </p>
+                <p>
+                    With experience in AAA games, I've specialized in developing core combat and gameplay
+                    features. I develop single and multiplayer cross-platform games using Unreal Engine and
+                    Unity Engine, with expertise in C++, C#, Gunplay, GAS, and other gameplay elements, while
+                    ensuring quality deliverables, leading system and gameplay development, and promoting
+                    mentorship, best practices, and code quality.
+                </p>
+            </div>
+
+        </section>
+
+        <section id="experience" class="section">
+            <h2 class="section-title" data-reveal><span class="title-mask"><span>Experience</span></span></h2>
+
+            <div class="timeline-wrapper" data-reveal>
+                <div class="timeline-track">
+
+                    <div class="timeline-item current">
+                        <span class="dot" aria-hidden="true"></span>
+                        <h3 class="timeline-heading">
+                            <button type="button" class="timeline-toggle" aria-expanded="false">
+                                <span class="role">Senior Gameplay Programmer</span>
+                                <span class="org">Epic Games</span>
+                                <span class="date">Since Sep 2024 &middot; Remote</span>
+                            </button>
+                        </h3>
+                        <div class="timeline-details">
+                            <div>
+                                <p>Responsible for maintaining and developing features for Fortnite.</p>
+                                <p class="skills">C++ &middot; Unreal Engine 5</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="dot" aria-hidden="true"></span>
+                        <h3 class="timeline-heading">
+                            <button type="button" class="timeline-toggle" aria-expanded="false">
+                                <span class="role">Lead Software Engineer</span>
+                                <span class="org">Big Moxi Games</span>
+                                <span class="date">Jan 2024 to Sep 2024 &middot; Porto Alegre</span>
+                            </button>
+                        </h3>
+                        <div class="timeline-details">
+                            <div>
+                                <ul class="subroles">
+                                    <li class="is-latest">
+                                        <span class="subrole-date">May 2024 to Sep 2024</span>
+                                        <p>Responsible for ensuring the quality of the technical team's deliverables, leading the development of systems and gameplay features. Focus on mentorship, best practices, and maintaining code quality.</p>
+                                        <p class="skills">Project Management</p>
+                                    </li>
+                                    <li>
+                                        <span class="subrole-title">Senior Software Engineer</span>
+                                        <span class="subrole-date">Jan 2024 to Sep 2024</span>
+                                        <p>Responsible for developing multiplayer cross-platform projects utilizing Unreal Engine 5 and C++, while leveraging expertise in Gunplay, GAS, and other gameplay features.</p>
+                                        <p class="skills">C++ &middot; Unreal Engine 5</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="dot" aria-hidden="true"></span>
+                        <h3 class="timeline-heading">
+                            <button type="button" class="timeline-toggle" aria-expanded="false">
+                                <span class="role">Programming Coordinator</span>
+                                <span class="org">Flux Games</span>
+                                <span class="date">Nov 2021 to Dec 2023 &middot; S&atilde;o Paulo</span>
+                            </button>
+                        </h3>
+                        <div class="timeline-details">
+                            <div>
+                                <ul class="subroles">
+                                    <li class="is-latest">
+                                        <span class="subrole-date">Apr 2022 to Dec 2023</span>
+                                        <p>Responsible for core combat and generic gameplay features, mentoring, code quality and good practices on the technical team, using C# and Unity Engine 3D.</p>
+                                        <p class="skills">Unity3D &middot; Unreal Engine</p>
+                                    </li>
+                                    <li>
+                                        <span class="subrole-title">Mid-Level Gameplay Programmer</span>
+                                        <span class="subrole-date">Mar 2022 to Dec 2023</span>
+                                        <p class="skills">C# &middot; Unity3D</p>
+                                    </li>
+                                    <li>
+                                        <span class="subrole-title">Gameplay Programmer</span>
+                                        <span class="subrole-date">Nov 2021 to Mar 2022</span>
+                                        <p class="skills">C# &middot; Gameplay Programming</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="dot" aria-hidden="true"></span>
+                        <h3 class="timeline-heading">
+                            <button type="button" class="timeline-toggle" aria-expanded="false">
+                                <span class="role">Unity Asset Store Tools Developer</span>
+                                <span class="org">Freelance</span>
+                                <span class="date">Jan 2020 to Dec 2023 &middot; Remote</span>
+                            </button>
+                        </h3>
+                        <div class="timeline-details">
+                            <div>
+                                <p>I created multiple modular gameplay and editor tools to help developers on their projects.</p>
+                                <p class="skills">Unity3D &middot; C#</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <div class="sm-container">
+                <a class="sm-icon" href="https://www.linkedin.com/in/carlosmconcencio/" rel="noopener" target="_blank"
+                    aria-label="LinkedIn" data-magnet="9" data-magnet-radius="90">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a class="sm-icon" href="https://github.com/carlinhu" rel="noopener" target="_blank"
+                    aria-label="GitHub" data-magnet="9" data-magnet-radius="90">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+                <a class="sm-icon" href="https://assetstore.unity.com/publishers/37008" rel="noopener" target="_blank"
+                    aria-label="Unity Asset Store" data-magnet="9" data-magnet-radius="90">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12.9288 4.2939 3.7997 2.1929c.1366.077.1415.2905 0 .3675l-4.515 2.6076a.4192.4192 0 0 1-.4246 0L7.274 6.8543c-.139-.0745-.1415-.293 0-.3675l3.7972-2.193V0L1.3758 5.5977V16.793l3.7177-2.1456v-4.3858c-.0025-.1565.1813-.2682.318-.1838l4.5148 2.6076a.4252.4252 0 0 1 .2136.3676v5.2127c.0025.1565-.1813.2682-.3179.1838l-3.7996-2.1929-3.7178 2.1457L12 24l9.6954-5.5977-3.7178-2.1457-3.7996 2.1929c-.1341.082-.3229-.0248-.3179-.1838V13.053c0-.1565.087-.2956.2136-.3676l4.5149-2.6076c.134-.082.3228.0224.3179.1838v4.3858l3.7177 2.1456V5.5977L12.9288 0Z"/></svg>
+                </a>
+            </div>
+            <p class="footer-note">Porto Alegre, Brazil</p>
+        </footer>
+
     </div>
-
-
-    <div class="sm-container icon-links">
-        <div class="sm-icon">
-            <a href="https://www.linkedin.com/in/carlosmconcencio/" rel="noopener" target="_blank">
-                    <span>
-                        <img alt="LinkedIn icon" src="img/linkedin.png" height="24px" width="24px"/>
-                    </span>
-            </a>
-        </div>
-        <div class="sm-icon">
-            <a href="https://github.com/carlinhu" rel="noopener" target="_blank">
-                    <span>
-                        <img alt="GitHub icon" src="img/github.png" height="24px" width="24px"/>
-                    </span>
-            </a>
-        </div>
-        <div class="sm-icon">
-            <a href="https://assetstore.unity.com/publishers/37008" rel="noopener" target="_blank">
-                    <span>
-                        <img alt="Unity icon" src="img/unity.png" height="24px" width="24px"/>
-                    </span>
-            </a>
-        </div>
-    </div>
-</div>
-
 </body>
+
 </html>

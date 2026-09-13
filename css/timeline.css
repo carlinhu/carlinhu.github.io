@@ -1,0 +1,433 @@
+/* Track */
+
+.timeline-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+.timeline-track {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.timeline-track::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        var(--hairline) 6%,
+        var(--hairline) 94%,
+        transparent 100%);
+}
+
+/* Items */
+
+.timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 0 2.6rem 2.8rem 0;
+    text-align: right;
+    align-self: flex-start;
+
+    color: var(--ink);
+    font-weight: 400;
+}
+
+.timeline-item:nth-child(even) {
+    align-self: flex-end;
+    text-align: left;
+    padding: 0 0 2.8rem 2.6rem;
+}
+
+.timeline-item:last-child {
+    padding-bottom: .5rem;
+}
+
+/* Dots */
+
+/* Registered so the hover scale can transition */
+@property --dot-scale {
+    syntax: '<number>';
+    inherits: false;
+    initial-value: 1;
+}
+
+.timeline-item .dot {
+    position: absolute;
+    top: .38rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    z-index: 2;
+
+    /* --near (0 to 1) is set by js/interactions.js */
+    --dot-scale: 1;
+    background: color-mix(in srgb,
+        var(--accent) calc(var(--near, 0) * 100%),
+        var(--ink-soft));
+    transform: scale(calc(var(--dot-scale) + var(--near, 0) * .55));
+    box-shadow: 0 0 calc(var(--near, 0) * 16px) calc(var(--near, 0) * 2px) var(--accent-glow);
+
+    transition: --dot-scale .3s var(--ease), background-color .3s var(--ease);
+}
+
+.timeline-item:nth-child(odd) .dot {
+    right: -5px;
+    left: auto;
+}
+
+.timeline-item:nth-child(even) .dot {
+    left: -5px;
+    right: auto;
+}
+
+.timeline-item.current .dot {
+    background: var(--accent);
+    --dot-scale: 1.35;
+}
+
+.timeline-item.current .dot::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    animation: pulse 2.4s var(--ease) infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(.7);
+        opacity: .9;
+    }
+
+    100% {
+        transform: scale(2.1);
+        opacity: 0;
+    }
+}
+
+.timeline-item:hover .dot,
+.timeline-item:focus-within .dot {
+    --dot-scale: 1.5;
+}
+
+.timeline-item.current:hover .dot,
+.timeline-item.current:focus-within .dot {
+    --dot-scale: 1.7;
+}
+
+.timeline-heading {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.timeline-toggle {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+.timeline-toggle .role {
+    display: block;
+    font-size: .92rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: .15rem;
+    transition: color .25s var(--ease);
+}
+
+.timeline-toggle:hover .role,
+.timeline-toggle:focus-visible .role {
+    color: var(--accent);
+}
+
+.timeline-toggle .org {
+    display: block;
+    font-size: .82rem;
+    font-weight: 400;
+    color: var(--accent);
+    opacity: .85;
+}
+
+.timeline-toggle .date {
+    display: block;
+    margin-top: .2rem;
+    font-size: .7rem;
+    font-weight: 400;
+    letter-spacing: .05em;
+    color: var(--ink-soft);
+}
+
+/* Details */
+
+.timeline-details {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows .4s var(--ease),
+                opacity .4s var(--ease),
+                margin-top .4s var(--ease);
+}
+
+.timeline-details > div {
+    overflow: hidden;
+}
+
+.timeline-item.open .timeline-details {
+    grid-template-rows: 1fr;
+    opacity: .85;
+    margin-top: .55rem;
+}
+
+.timeline-details p {
+    margin: 0;
+    font-size: .82rem;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.timeline-details .skills {
+    margin-top: .45rem;
+    font-size: .7rem;
+    letter-spacing: .06em;
+    color: var(--ink-soft);
+}
+
+/* Previous roles within a company */
+
+/* Stretch the clipped box to the center line so sub-dots are not cut off */
+.timeline-item:nth-child(odd) .timeline-details > div {
+    margin-right: calc(-2.6rem - 6px);
+    padding-right: calc(2.6rem + 6px);
+}
+
+.timeline-item:nth-child(even) .timeline-details > div {
+    margin-left: calc(-2.6rem - 6px);
+    padding-left: calc(2.6rem + 6px);
+}
+
+.subroles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.subroles li {
+    position: relative;
+    margin-top: 1rem;
+}
+
+.subroles li:first-child {
+    margin-top: 0;
+}
+
+.subroles li::before {
+    content: "";
+    position: absolute;
+    top: .38rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ink-soft);
+    opacity: .75;
+
+    transform: scale(0);
+    transition: transform .35s var(--ease);
+}
+
+.subroles li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: .6rem;
+    width: 1px;
+    height: calc(100% + 1rem);
+    background: var(--hairline);
+
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform .5s var(--ease);
+}
+
+.timeline-item.open .subroles li::before {
+    transform: scale(1);
+}
+
+.timeline-item.open .subroles li::after {
+    transform: scaleY(1);
+}
+
+.timeline-item.open .subroles li:nth-child(1)::before {
+    transition-delay: .08s;
+}
+
+.timeline-item.open .subroles li:nth-child(1)::after {
+    transition-delay: .14s;
+}
+
+.timeline-item.open .subroles li:nth-child(2)::before {
+    transition-delay: .34s;
+}
+
+.timeline-item.open .subroles li:nth-child(2)::after {
+    transition-delay: .40s;
+}
+
+.timeline-item.open .subroles li:nth-child(3)::before {
+    transition-delay: .60s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .subroles li::before {
+        transform: scale(1);
+    }
+
+    .subroles li:not(:last-child)::after {
+        transform: scaleY(1);
+    }
+}
+
+.timeline-item:nth-child(odd) .subroles li::before {
+    right: calc(-2.6rem - 3px);
+}
+
+.timeline-item:nth-child(even) .subroles li::before {
+    left: calc(-2.6rem - 3px);
+}
+
+.timeline-item:nth-child(odd) .subroles li::after {
+    right: calc(-2.6rem - .5px);
+}
+
+.timeline-item:nth-child(even) .subroles li::after {
+    left: calc(-2.6rem - .5px);
+}
+
+.subroles li.is-latest::before {
+    top: .31rem;
+}
+
+.subroles .subrole-title {
+    display: block;
+    font-size: .82rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.subroles .subrole-date {
+    display: block;
+    margin-top: .1rem;
+    font-size: .68rem;
+    letter-spacing: .05em;
+    color: var(--ink-soft);
+}
+
+.timeline-details .subroles p {
+    margin-top: .3rem;
+}
+
+/* Mobile: single column */
+
+@media (max-width: 640px) {
+    .timeline-track::before {
+        left: 4px;
+        transform: none;
+    }
+
+    .timeline-item,
+    .timeline-item:nth-child(even) {
+        width: 100%;
+        align-self: stretch;
+        text-align: left;
+        padding: 0 0 2.4rem 1.9rem;
+    }
+
+    .timeline-item:nth-child(odd) .dot,
+    .timeline-item:nth-child(even) .dot {
+        left: 0;
+        right: auto;
+    }
+
+    .timeline-item:last-child {
+        padding-bottom: .5rem;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-details > div,
+    .timeline-item:nth-child(even) .timeline-details > div {
+        margin-right: 0;
+        padding-right: 0;
+        margin-left: -1.9rem;
+        padding-left: 1.9rem;
+    }
+
+    .timeline-item:nth-child(odd) .subroles li::before,
+    .timeline-item:nth-child(even) .subroles li::before {
+        right: auto;
+        left: calc(-1.9rem + 1.5px);
+    }
+
+    .timeline-item:nth-child(odd) .subroles li::after,
+    .timeline-item:nth-child(even) .subroles li::after {
+        right: auto;
+        left: calc(-1.9rem + 4px);
+    }
+}
+
+/* Scroll-driven drawing; static where animation-timeline is unsupported */
+
+@keyframes timeline-draw {
+    from {
+        scale: 1 0;
+    }
+
+    to {
+        scale: 1 1;
+    }
+}
+
+@keyframes dot-arrive {
+    from {
+        scale: .2;
+        opacity: 0;
+    }
+
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+}
+
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+        /* 'scale' composes with the existing transform instead of replacing it */
+        .timeline-track::before {
+            transform-origin: top;
+            animation: timeline-draw linear both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 50%;
+        }
+
+        .timeline-item .dot {
+            animation: dot-arrive linear both;
+            animation-timeline: view();
+            animation-range: cover 10% cover 30%;
+        }
+    }
+}

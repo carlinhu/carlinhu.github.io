@@ -1,0 +1,45 @@
+.site-footer {
+    margin-top: 4rem;
+    padding: 2.5rem 0 1rem;
+    text-align: center;
+    border-top: 1px solid var(--hairline);
+}
+
+.sm-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.75rem;
+}
+
+/* transform is driven by js/interactions.js */
+.sm-icon {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    color: var(--ink-soft);
+    opacity: .75;
+    transition: color .25s var(--ease), opacity .25s var(--ease);
+}
+
+.sm-icon:hover,
+.sm-icon:focus-visible {
+    color: var(--ink);
+    opacity: 1;
+}
+
+.sm-icon svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+.footer-note {
+    margin-top: 1.6rem;
+    font-size: .7rem;
+    font-weight: 300;
+    letter-spacing: .08em;
+    color: var(--ink-soft);
+    opacity: .7;
+}

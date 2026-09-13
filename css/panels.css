@@ -1,0 +1,37 @@
+.about-body {
+    max-width: 46rem;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 2.5rem;
+
+    font-size: .95rem;
+    font-weight: 400;
+    line-height: 1.75;
+    color: var(--ink);
+    opacity: .88;
+}
+
+.about-body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--ink-soft), transparent);
+    opacity: .55;
+}
+
+.about-body p {
+    margin: 0 0 1.1rem;
+}
+
+.about-body p:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 560px) {
+    .about-body {
+        padding-left: 1.4rem;
+    }
+}

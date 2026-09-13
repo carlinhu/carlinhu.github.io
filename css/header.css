@@ -1,0 +1,197 @@
+/* Hero */
+
+.hero {
+    text-align: center;
+    padding: 5.5rem 0 1rem;
+}
+
+.hero h1 {
+    font-family: 'Raleway', system-ui, sans-serif;
+    font-size: clamp(2.6rem, 9vw, 4.2rem);
+    font-weight: 500;
+    letter-spacing: -.02em;
+}
+
+.hero .subtitle {
+    font-family: 'Raleway', system-ui, sans-serif;
+    margin-top: .9rem;
+    font-size: clamp(1rem, 3.4vw, 1.5rem);
+    font-weight: 200;
+    color: var(--ink-soft);
+}
+
+@keyframes rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+        filter: blur(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+}
+
+.hero h1 {
+    animation: rise-in 1s var(--ease) .10s backwards;
+}
+
+.hero .subtitle {
+    animation: rise-in 1s var(--ease) .18s backwards;
+}
+
+.main-nav {
+    animation: rise-in 1s var(--ease) .26s backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero h1, .hero .subtitle, .main-nav {
+        animation: none;
+    }
+}
+
+/* Nav */
+
+.main-nav {
+    position: sticky;
+    top: .75rem;
+    z-index: 20;
+
+    width: fit-content;
+    max-width: 100%;
+    margin: 2.5rem auto 0;
+    padding: .55rem 1.35rem;
+
+    background: color-mix(in srgb, var(--bg-a) 70%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid transparent;
+    border-radius: 999px;
+
+    transition: border-color .3s var(--ease), box-shadow .3s var(--ease);
+}
+
+.main-nav.is-stuck {
+    border-color: var(--hairline);
+    box-shadow: 0 10px 34px -20px rgba(0, 0, 0, .45);
+}
+
+.main-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(.9rem, 3.5vw, 2rem);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav a {
+    position: relative;
+    display: inline-block;
+    padding: .2rem 0;
+    font-size: .95rem;
+    font-weight: 400;
+    text-decoration: none;
+    color: var(--ink);
+    opacity: .75;
+    transition: opacity .25s var(--ease);
+}
+
+.main-nav a:hover,
+.main-nav a:focus-visible,
+.main-nav a.is-active {
+    opacity: 1;
+}
+
+/* Active link indicator, positioned by js/nav.js */
+.main-nav ul {
+    position: relative;
+}
+
+.nav-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .5s var(--ease), width .5s var(--ease), opacity .3s var(--ease);
+}
+
+.nav-indicator.is-on {
+    opacity: 1;
+}
+
+@media (max-width: 430px) {
+    .main-nav {
+        padding: .5rem 1rem;
+        border-radius: 1.4rem;
+    }
+
+    .main-nav ul {
+        gap: .5rem .9rem;
+    }
+
+    .main-nav a {
+        font-size: .88rem;
+    }
+}
+
+/* Theme toggle */
+
+.theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 1.7rem;
+    height: 1.7rem;
+    margin: -.4rem 0;
+    padding: 0;
+
+    color: var(--ink);
+    opacity: .7;
+    background: none;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+
+    transition: opacity .25s var(--ease), transform .35s var(--ease);
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+    opacity: 1;
+    transform: rotate(-15deg);
+}
+
+.theme-toggle svg {
+    display: block;
+    grid-area: 1 / 1;
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+}
+
+/* Shows the icon of the theme the click switches to */
+.theme-toggle .icon-moon {
+    display: none;
+}
+
+.theme-toggle .icon-sun {
+    display: block;
+}
+
+:root[data-theme="light"] .theme-toggle .icon-sun {
+    display: none;
+}
+
+:root[data-theme="light"] .theme-toggle .icon-moon {
+    display: block;
+}
