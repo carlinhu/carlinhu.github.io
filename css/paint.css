@@ -1,6 +1,6 @@
-/* Paint-to-reveal subtitle. js/paint.js updates the --paint mask. */
+/* Paint-to-reveal subtitle. js/paint.js draws the visible text on .paint-layer. */
 
-/* Both texts share one grid cell; the box shrinks to fit the text */
+/* Both texts share one grid cell; the box shrinks to fit the longer one */
 .paint-reveal {
     display: grid;
     width: fit-content;
@@ -14,45 +14,33 @@
 
 .paint-reveal > span {
     grid-area: 1 / 1;
+    text-align: center;
 }
 
+/* Hidden but still laid out: js/paint.js reads its line boxes and draws it */
 .paint-back {
     visibility: hidden;
+    color: var(--accent);
 }
 
 .paint-reveal.is-ready {
-    --paint: linear-gradient(transparent, transparent);
-
+    position: relative;
     touch-action: none;
     /* Brush-sized cursor with a double stroke so it shows on both themes */
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Ccircle cx='18' cy='18' r='15' fill='none' stroke='%23000' stroke-opacity='.45' stroke-width='3'/%3E%3Ccircle cx='18' cy='18' r='15' fill='none' stroke='%23fff' stroke-opacity='.9' stroke-width='1.2'/%3E%3C/svg%3E") 18 18, crosshair;
 }
 
-/* Full-cell boxes keep both masks aligned */
-.paint-reveal.is-ready > span {
-    display: grid;
-    place-items: center;
-    align-self: stretch;
-    justify-self: stretch;
-
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-}
-
-.paint-reveal.is-ready .paint-back {
-    visibility: visible;
-    color: var(--accent);
-
-    -webkit-mask-image: var(--paint);
-    mask-image: var(--paint);
-}
-
-/* Inverse mask: full layer minus the paint */
+/* The canvas takes over the front text, the span stays for screen readers */
 .paint-reveal.is-ready .paint-front {
-    -webkit-mask-image: linear-gradient(#000, #000), var(--paint);
-    -webkit-mask-composite: xor;
-    mask-image: linear-gradient(#000, #000), var(--paint);
-    mask-composite: exclude;
+    color: transparent;
+}
+
+/* a canvas keeps its own pixel size, so the box has to be set here */
+.paint-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
