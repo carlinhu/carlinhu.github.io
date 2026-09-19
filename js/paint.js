@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () =>
     let painting = false;
     let lastPoint = null;
     let frameRequest = 0;
+    let maskVersion = 0;
+    let maskUrl = "";
 
     function resize()
     {
@@ -100,9 +102,52 @@ document.addEventListener("DOMContentLoaded", () =>
         });
     }
 
+    function applyMask(url, version)
+    {
+        // a later stroke already won, this one is stale
+        if (version !== maskVersion)
+        {
+            URL.revokeObjectURL(url);
+            return;
+        }
+
+        const previous = maskUrl;
+
+        host.style.setProperty("--paint", `url("${url}")`);
+        maskUrl = url;
+
+        if (previous)
+        {
+            // let the new mask paint once before the old one is dropped
+            requestAnimationFrame(() => URL.revokeObjectURL(previous));
+        }
+    }
+
+    // Firefox and Safari decode a new mask asynchronously, so swapping the url right
+    // away leaves a frame with no mask and the text blinks. Decode first, swap after.
     function updateMask()
     {
-        host.style.setProperty("--paint", `url("${canvas.toDataURL()}")`);
+        const version = ++maskVersion;
+
+        if (!canvas.toBlob)
+        {
+            host.style.setProperty("--paint", `url("${canvas.toDataURL()}")`);
+            return;
+        }
+
+        canvas.toBlob(blob =>
+        {
+            if (!blob || version !== maskVersion)
+            {
+                return;
+            }
+
+            const url = URL.createObjectURL(blob);
+            const image = new Image();
+            image.src = url;
+
+            image.decode().then(() => applyMask(url, version), () => applyMask(url, version));
+        });
     }
 
     function pointerPosition(event)
