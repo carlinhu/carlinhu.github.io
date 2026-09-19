@@ -1,0 +1,75 @@
+.clocks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+    margin-top: 1.9rem;
+    opacity: 0;
+    transition: opacity .6s var(--ease);
+}
+
+.clocks.is-live {
+    opacity: 1;
+}
+
+/* the clocks only mean something once the script fills them in */
+html:not(.js) .clocks,
+html:not(.js) .clock-note {
+    display: none;
+}
+
+.clock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .25rem;
+}
+
+.clock-label {
+    font-size: .62rem;
+    font-weight: 400;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: .7;
+}
+
+.clock-time {
+    font-size: 1.05rem;
+    font-weight: 300;
+    letter-spacing: .06em;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    opacity: .9;
+}
+
+.clock-divider {
+    width: 1px;
+    height: 2rem;
+    background: var(--hairline);
+}
+
+.clocks.is-local .clock-divider,
+.clocks.is-local .clock-you {
+    display: none;
+}
+
+.clock-note {
+    max-width: 34rem;
+    margin: 1.1rem auto 0;
+    font-size: .78rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+}
+
+@media (max-width: 420px) {
+    .clocks {
+        gap: 1.1rem;
+    }
+
+    .clock-note {
+        max-width: 22rem;
+    }
+}
